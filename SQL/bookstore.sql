@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2014 at 10:00 PM
+-- Generation Time: Nov 19, 2014 at 11:32 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -87,6 +87,20 @@ CREATE TABLE IF NOT EXISTS `category` (
   `bookid` int(11) NOT NULL,
   `category` int(5) NOT NULL,
   PRIMARY KEY (`bookid`,`category`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `bookid` int(11) NOT NULL,
+  `customerid` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `comment` text,
+  PRIMARY KEY (`bookid`,`customerid`,`date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
