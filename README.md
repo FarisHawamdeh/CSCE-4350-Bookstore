@@ -11,3 +11,4 @@ CSCE 4350 Term Project. Web Interface for e commerce website selling books.
 									 renamed category attribute to genre to remove confusion.
 									 added small set of sample data.
 									 
+11/29/14: inital Customer interface uploaded
