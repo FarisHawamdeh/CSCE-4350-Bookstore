@@ -2,6 +2,7 @@
 <html>
     <head>
         <link href="stylesheet.css" rel="stylesheet" type="text/css" />
+		<title>Admin Login</title>
     </head>
     <body>
         <table width="300" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">

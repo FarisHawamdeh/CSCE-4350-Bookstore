@@ -34,5 +34,6 @@ if ($count == 1) {
     header("location:splashscreen.php");
 } else {
     echo "Wrong Username or Password";
+	header("location:login.php");
 }
 ?>

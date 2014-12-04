@@ -24,9 +24,9 @@ echo "<div align = center>";
 echo "<form method = \"POST\" action = \"\">";
 echo"<table width = 30% bgcolor = grey >";
 echo "<tr bgcolor = #DEDEDE><td><font color = black size = '4'>Name: </font></td>";
-echo "<td><input name=\"name\" type=\"text\" value= \" \" size=\"45\" maxlength=\"45\" /></td></tr>";
+echo "<td><input name=\"name\" type=\"text\" value= \"\" size=\"45\" maxlength=\"45\" /></td></tr>";
 echo "<tr bgcolor = #DEDEDE><td><font color = black size = '4'>Email: </font></td>";
-echo "<td><input name=\"email\" type=\"text\" value= \" \" size=\"45\" maxlength=\"60\" /></td></tr>";
+echo "<td><input name=\"email\" type=\"text\" value= \"\" size=\"45\" maxlength=\"60\" /></td></tr>";
 echo "<tr bgcolor = #DEDEDE><td><font color = black size = '4'>Password: </font></td>";
 echo "<td><input name=\"password\" type=\"password\" value= \"\" size=\"45\" maxlength=\"45\" /></td></tr>";
 echo "<tr bgcolor = #DEDEDE><td><font color = black size = '4'>Address: </font></td>";
@@ -69,8 +69,20 @@ if (isset($_POST['submitInfo'])) {
             $state = $_POST['state'];
             $zip = $_POST['zip'];
             $phonenumber = $_POST['phonenumber'];
+			
+			$sql = "SELECT * FROM seller";
+			$result = mysqli_query($con, $sql);
+			
+			$newsellerid = 0;
+			
+			while ($row = mysqli_fetch_assoc($result)) {
+				$newsellerid = $newsellerid + 1;
+			}
+			
+			$newsellerid = $newsellerid + 1;
+			
             //insert account into database
-            $query = "INSERT INTO seller (name, emailaddress, password, address, city, state, zip, phonenumber, isdeleted)VALUES('" . $name . "','" . $newUsername . "','" . $newPass . "', '" . $address . "', '" . $city . "', '" . $state . "', '" . $zip . "', '" . $phonenumber . "', '0')";
+            $query = "INSERT INTO seller (sellerid, name, emailaddress, password, address, city, state, zip, phonenumber, isdeleted)VALUES('" . $newsellerid . "','" . $name . "','" . $newUsername . "','" . $newPass . "', '" . $address . "', '" . $city . "', '" . $state . "', '" . $zip . "', '" . $phonenumber . "', '0')";
             mysqli_query($con, $query); //returns FALSE if query fails
             header("Location: viewsellers.php");
             echo "Account Created!";

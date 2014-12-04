@@ -12,7 +12,9 @@
 $host = "localhost"; // Host name 
 $username = "root"; // Mysql username 
 $password = ""; // Mysql password 
-$db = "bookstore"; // Database name  
+$db = "bookstore"; // Database name
+
+$count = 0;
 
 $con = mysqli_connect($host, $username, $password, $db);
 
@@ -24,9 +26,9 @@ echo "<div align = center>";
 echo "<form method = \"POST\" action = \"\">";
 echo"<table width = 30% bgcolor = grey >";
 echo "<tr bgcolor = #DEDEDE><td><font color = black size = '4'>First Name: </font></td>";
-echo "<td><input name=\"firstname\" type=\"text\" value= \" \" size=\"45\" maxlength=\"45\" /></td></tr>";
+echo "<td><input name=\"firstname\" type=\"text\" value= \"\" size=\"45\" maxlength=\"45\" /></td></tr>";
 echo "<tr bgcolor = #DEDEDE><td><font color = black size = '4'>Last Name: </font></td>";
-echo "<td><input name=\"lastname\" type=\"text\" value= \" \" size=\"45\" maxlength=\"60\" /></td></tr>";
+echo "<td><input name=\"lastname\" type=\"text\" value= \"\" size=\"45\" maxlength=\"60\" /></td></tr>";
 echo "<tr bgcolor = #DEDEDE><td><font color = black size = '4'>Username: </font></td>";
 echo "<td><input name=\"username\" type=\"text\" value= \"\" size=\"45\" maxlength=\"45\" /></td></tr>";
 echo "<tr bgcolor = #DEDEDE><td><font color = black size = '4'>Password: </font></td>";
@@ -57,11 +59,22 @@ if (isset($_POST['submitInfo'])) {
             $newPass = $_POST['password'];
             $firstname = $_POST['firstname'];
             $lastname = $_POST['lastname'];
+			
+			$sql = "SELECT * FROM admin";
+			$result = mysqli_query($con, $sql);
+			
+			$newadminid = 0;
+			
+			while ($row = mysqli_fetch_assoc($result)) {
+				$newadminid = $newadminid + 1;
+			}
+			
+			$newadminid = $newadminid + 1;
+			
             //insert account into database
-            $query = "INSERT INTO admin (firstname, lastname, username, password, issuper)VALUES('" . $firstname . "','" . $lastname . "','" . $newUsername . "', '" . $newPass . "', '0')";
-            mysqli_query($con, $query); //returns FALSE if query fails
+            $query = "INSERT INTO admin (adminid, firstname, lastname, username, password, issuper)VALUES('". $newadminid . "','" . $firstname . "','" . $lastname . "','" . $newUsername . "', '" . $newPass . "', '0')";
+            $result = mysqli_query($con, $query); //returns FALSE if query fails
             header("Location: viewadmins.php");
-            echo "Account Created!";
         }
     }
 }
