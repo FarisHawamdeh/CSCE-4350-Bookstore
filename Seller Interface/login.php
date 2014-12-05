@@ -32,13 +32,6 @@
             </form>
         </tr>
         <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>
-                <form action="register.php">
-                    <input type="submit" value="Register">
-                </form>
-            </td>
         </tr>
     </table>
 </td>

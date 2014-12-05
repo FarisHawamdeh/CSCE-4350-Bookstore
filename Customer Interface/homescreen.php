@@ -14,6 +14,12 @@
         }
         ?> 
 
+        <form method="post" action="logout.php">
+            <input type="submit" value="Logout">
+        </form>
+
+        <br>
+
         <a href="viewItem.php">Cart (<?php echo count($_SESSION['cart']); ?>)</a>
 
         <form method="post" id="searchForm" action="searchItems.php">
@@ -28,25 +34,41 @@
             </select>
         </form>  
 
-        <form id="genreButton" method="post" action="searchItems.php">
+        <br><br>
+
+        <form id="genreButton"  method="post" action="searchItems.php">
             <input type="hidden" name="genre" value='0'>
-            <br><br>
             <input type="submit" value="Travel">
+        </form>
 
         <form id="genreButton" method="post" action="searchItems.php">
             <input type="hidden" name="genre" value='1'>
             <input type="submit" value="Mystery">
+        </form>
 
         <form id="genreButton" method="post" action="searchItems.php">
             <input type="hidden" name="genre" value='2'>
             <input type="submit" value="Humor">
+        </form>
 
         <form id="genreButton" method="post" action="searchItems.php">
             <input type="hidden" name="genre" value='3'>
             <input type="submit" value="Fiction">
+        </form>
 
         <form id="genreButton" method="post" action="searchItems.php">
             <input type="hidden" name="genre" value='4'>
             <input type="submit" value="Nonfiction">
+        </form>
+
+        <br><br><br>
+
+        <form method="post" action="searchItemToComment.php">
+            Enter a book title EXACTLY to comment on:<br>
+            <input type="text" name="wanted">
+            <br>
+            <input type="submit" value="Search">
+        </form>  
+
     </body>
 </html>

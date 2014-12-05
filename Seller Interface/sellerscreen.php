@@ -40,7 +40,8 @@ function checkCurrentItems()
     . "FROM\n"
     . "\n"
     . "(SELECT *\n"
-    . "FROM book )AS b\n"
+    . "FROM book \n"
+    . "WHERE isdeleted = 0)AS b\n"
     . "\n"
     . "INNER JOIN\n"
     . "\n"
@@ -65,14 +66,13 @@ function checkCurrentItems()
         echo "<tr bgcolor = #FFFFFF>";
                 echo "<td>";
                 echo "<h1 align='left'>" . $row['title'] . "</h1> <h4 align='left'>" . "Published by: " . $row['publisher'] . " on " . $row['publicationdate'] . "</h4> <h4 align='left'>" . "ISBN:" . $row['isbn'] . "</h4>";
-        /////////////EDIT ITEM FUNCTIONALITY
-        echo "<form method = \"POST\" action = \"editItem.php\">";
+
         echo "<input type=\"hidden\" name=\"bookid\" value='" . $row['bookid'] . "'>";
         echo "<input type=\"hidden\" name=\"title\" value='" . $row['title'] . "'>";
         echo "<input type=\"hidden\" name=\"publisher\" value='" . $row['publisher'] . "'>";
         echo "<input type=\"hidden\" name=\"publicationdate\" value='" . $row['publicationdate'] . "'>";
         echo "<input type=\"hidden\" name=\"isbn\" value='" . $row['isbn'] . "'>";
-    
+        
         $query2 = "SELECT * FROM bookformat WHERE bookid = " . $row['bookid'];
                 $results2 = mysqli_query($con, $query2);
 
@@ -89,10 +89,13 @@ function checkCurrentItems()
 
                 echo '  $';
 
-                echo "<input type=\"text\" name=\"bookprice\" id=\"bookprice\" value='" . $price . "' readonly >";
-
+                 echo "<input type=\"text\" name=\"bookprice\" id=\"bookprice\" value='" . $price . "' readonly >";
+        /////////////////DELETE FUNCTIONALITY
+                
                 echo '<br>';
-                echo "<input value =\"Edit Item\" type=\"submit\">";
+                echo "<form method = \"POST\" action = \"deleteItem.php\">";
+                echo "<input type=\"hidden\" name=\"deletebookid\" value='" . $row['bookid'] . "'>";
+                echo "<input value =\"Delete Item\" type=\"submit\">";
                 echo "</form>";
 
 
@@ -121,9 +124,6 @@ function checkCurrentItems()
 }
     checkCurrentItems();
 ?>
-
-        <!--Current Orders -->
-
         <!-- Add items-->
         <form action="addItem.php">
         <input type="submit" value="Add New Item">
